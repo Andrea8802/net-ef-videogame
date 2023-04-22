@@ -51,8 +51,8 @@
                             Console.WriteLine("Inserisci l'id per cercare un videogioco:");
                             long id = long.Parse(Console.ReadLine());
 
-                            //Videogame videogame = VideogameManager.RicercaPerId(id);
-                            //Console.WriteLine(videogame.Name);
+                            Videogame videogame = VideogameManager.RicercaPerId(id);
+                            Console.WriteLine(videogame.Name);
 
                             break;
 
@@ -61,12 +61,12 @@
                             Console.WriteLine("Inserisci il nome per cercare un videogioco:");
                             string nome = Console.ReadLine();
 
-                            //List<Videogame> videogameList = VideogameManager.RicercaPerNome(nome);
+                            List<Videogame> videogameList = VideogameManager.RicercaPerNome(nome);
 
-                            //foreach (Videogame videogameSearched in videogameList)
-                            //{
-                            //    Console.WriteLine(videogameSearched.Name);
-                            //}
+                            foreach (Videogame videogameSearched in videogameList)
+                            {
+                                Console.WriteLine(videogameSearched.Name);
+                            }
 
                             break;
 
@@ -75,7 +75,7 @@
                             Console.WriteLine("Inserisci l'id del videogioco da cancellare:");
                             long idVideogame = long.Parse(Console.ReadLine());
 
-                            //VideogameManager.CancellaVideogioco(idVideogame);
+                            VideogameManager.CancellaVideogioco(idVideogame);
 
                             break;
 
