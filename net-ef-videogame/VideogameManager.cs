@@ -12,8 +12,8 @@ namespace net_ef_videogame
     {
         public static void InserisciVideogame(Videogame newVideogame)
         {
-
-            using(VideogameContext db = new VideogameContext())
+            Console.WriteLine("\nCaricamento in corso..\n");
+            using (VideogameContext db = new VideogameContext())
             {
                 db.Add(newVideogame);
                 db.SaveChanges();
@@ -22,6 +22,7 @@ namespace net_ef_videogame
 
         public static Videogame? RicercaPerId(long id)
         {
+            Console.WriteLine("\nCaricamento in corso..\n");
 
             Videogame videogameSearched;
 
@@ -36,7 +37,9 @@ namespace net_ef_videogame
 
         public static List<Videogame>? RicercaPerNome(string name)
         {
-            List <Videogame> videogames = new List<Videogame>();
+            Console.WriteLine("\nCaricamento in corso..\n");
+
+            List<Videogame> videogames = new List<Videogame>();
             using (VideogameContext db = new VideogameContext())
             {
                videogames = db.Videogame.Where(videogame => videogame.Name.Contains(name)).ToList();
@@ -46,6 +49,8 @@ namespace net_ef_videogame
         }
         public static void CancellaVideogioco(long id)
         {
+            Console.WriteLine("\nCaricamento in corso..\n");
+
             using (VideogameContext db = new VideogameContext())
             {
                 Videogame videogame = db.Videogame.Where(videogame => videogame.Id == id).First();
@@ -56,7 +61,9 @@ namespace net_ef_videogame
 
         public static void NuovaSoftwareHouse(SoftwareHouse newSoftwareHouse)
         {
-            using(VideogameContext db = new VideogameContext())
+            Console.WriteLine("\nCaricamento in corso..\n");
+
+            using (VideogameContext db = new VideogameContext())
             {
                 db.Add(newSoftwareHouse);
                 db.SaveChanges();
@@ -64,8 +71,10 @@ namespace net_ef_videogame
         }
 
         public static List<SoftwareHouse>? GetSoftwareHouseList() 
-        { 
-            List <SoftwareHouse> softwareHouses = new List<SoftwareHouse>();
+        {
+            Console.WriteLine("\nCaricamento in corso..\n");
+
+            List<SoftwareHouse> softwareHouses = new List<SoftwareHouse>();
             using (VideogameContext db = new VideogameContext())
             {
                 softwareHouses = db.SoftwareHouse.OrderBy(softwareHouse => softwareHouse.Id).ToList();
@@ -76,6 +85,8 @@ namespace net_ef_videogame
 
         public static List<Videogame>? GetSoftwareHouseVideogames(long id)
         {
+            Console.WriteLine("\nCaricamento in corso..\n");
+
             List<Videogame> videogames = new List<Videogame>();
             using (VideogameContext db = new VideogameContext())
             {
