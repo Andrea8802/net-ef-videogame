@@ -53,5 +53,37 @@ namespace net_ef_videogame
                 db.SaveChanges();
             }
         }
+
+        public static void NuovaSoftwareHouse(SoftwareHouse newSoftwareHouse)
+        {
+            using(VideogameContext db = new VideogameContext())
+            {
+                db.Add(newSoftwareHouse);
+                db.SaveChanges();
+            }
+        }
+
+        public static List<SoftwareHouse>? GetSoftwareHouseList() 
+        { 
+            List <SoftwareHouse> softwareHouses = new List<SoftwareHouse>();
+            using (VideogameContext db = new VideogameContext())
+            {
+                softwareHouses = db.SoftwareHouse.OrderBy(softwareHouse => softwareHouse.Id).ToList();
+            }
+
+            return softwareHouses;
+        }
+
+        public static List<Videogame>? GetSoftwareHouseVideogames(long id)
+        {
+            List<Videogame> videogames = new List<Videogame>();
+            using (VideogameContext db = new VideogameContext())
+            {
+                videogames = db.SoftwareHouse.Where(softwareHouse => softwareHouse.Id == id).SelectMany(softwareHouse => softwareHouse.Videogames).ToList();
+            }
+
+            return videogames;
+        }
+
     }
 }

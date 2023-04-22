@@ -13,7 +13,8 @@
                         $"2) Ricercare un videogioco per ID\n" +
                         $"3) Ricercare un videogioco per nome\n" +
                         $"4) Eliminare un videogioco\n" +
-                        $"5) Esci");
+                        $"5) Inserisci una nuova software house\n" +
+                        $"6) Esci");
 
                     ConsoleKey tastoUtente = Console.ReadKey(true).Key;
 
@@ -30,13 +31,15 @@
                             Console.WriteLine("Inserisci la data di rilascio del videogioco:");
                             DateTime releaseDate = DateTime.Parse(Console.ReadLine());
 
-                            Console.WriteLine("Le scelte possibili per la Software House sono: \n" +
-                                "1) Nintendo \n" +
-                                "2) Rockstar Games \n" +
-                                "3) Valve Corporation \n" +
-                                "4) Electronic Arts \n" +
-                                "5) Ubisoft \n" +
-                                "6) Konami \n");
+                            List <SoftwareHouse> softwareHouseList = VideogameManager.GetSoftwareHouseList();
+
+                            Console.WriteLine("Scegli una software house:");
+
+
+                            foreach(SoftwareHouse softwareHouse in softwareHouseList)
+                            {
+                                Console.WriteLine($"{softwareHouse.Id}) {softwareHouse.Name}");
+                            }
 
                             long shId = long.Parse(Console.ReadLine());
 
@@ -80,6 +83,45 @@
                             break;
 
                         case ConsoleKey.D5:
+                            Console.WriteLine("Inserisci il nome della software house:");
+                            string nomeSH = Console.ReadLine();
+
+                            Console.WriteLine("Inserisci la città della software house:");
+                            string city = Console.ReadLine();
+
+                            Console.WriteLine("Inserisci la nazione della software house:");
+                            string country = Console.ReadLine();
+
+                            SoftwareHouse newSoftwareHouse = new SoftwareHouse(nomeSH, city, country);
+
+                            VideogameManager.NuovaSoftwareHouse(newSoftwareHouse);
+
+                            break;
+
+                        case ConsoleKey.D6:
+                            List<SoftwareHouse> softwareHouses = VideogameManager.GetSoftwareHouseList();
+
+                            Console.WriteLine("Scegli una software house:");
+
+
+                            foreach (SoftwareHouse softwareHouse in softwareHouses)
+                            {
+                                Console.WriteLine($"{softwareHouse.Id}) {softwareHouse.Name}");
+                            }
+                   
+                            long softwareHouseId = long.Parse(Console.ReadLine());
+
+                            Console.WriteLine($"I videogiochi prodotti da '{softwareHouses[(int)softwareHouseId - 1].Name}' sono i seguenti:");
+
+                           List <Videogame> videogamesSearched = VideogameManager.GetSoftwareHouseVideogames(softwareHouseId);
+
+                            foreach(Videogame videogameSearched in videogamesSearched)
+                            {
+                                Console.WriteLine($"{videogameSearched.Id}) {videogameSearched.Name}");
+                            }
+
+                            break;
+                        case ConsoleKey.D7:
                             return;
                     }
                 }
